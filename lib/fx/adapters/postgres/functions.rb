@@ -48,7 +48,9 @@ module Fx
         end
 
         def to_fx_function(result)
-          Fx::Function.new(result)
+          fn = result.dup
+          fn['definition'].gsub!(/(create(?: or replace)? function )public\.(.*)/i, '\1\2')
+          Fx::Function.new(fn)
         end
       end
     end
